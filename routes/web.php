@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// For Pizza
+Route::get('/pizza', [App\Http\Controllers\PizzaController::class, 'index'])->name('pizza.index');
