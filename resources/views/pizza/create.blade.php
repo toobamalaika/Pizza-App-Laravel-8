@@ -23,7 +23,7 @@
                         <div class="alert alert-danger"> {{ $error }} </div>
                     @endforeach
                 @endif
-                <form method="POST" action="{{ route('pizza.store') }}">
+                <form method="POST" action="{{ route('pizza.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
