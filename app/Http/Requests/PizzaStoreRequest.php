@@ -23,14 +23,51 @@ class PizzaStoreRequest extends FormRequest
      */
     public function rules()
     {
+        // return [
+        //     'name' => 'required|string|min:3',
+        //     'description' => 'required|string',
+        //     'small_pizza_price' => 'required|numeric',
+        //     'medium_pizza_price' => 'required|numeric',
+        //     'large_pizza_price' => 'required|numeric',
+        //     'category' => 'required',
+        //     'image' => 'required|mimes:png,jpg,jpeg'
+        // ];
+
+        switch ($this->method()) {
+            case 'GET':
+            case 'DELETE': {
+                return [];
+            }
+            case 'POST': {
+                return [
+                    'name' => 'required|string|min:3',
+                    'description' => 'required|string',
+                    'small_pizza_price' => 'required|numeric',
+                    'medium_pizza_price' => 'required|numeric',
+                    'large_pizza_price' => 'required|numeric',
+                    'category' => 'required',
+                    'image' => 'required|mimes:png,jpg,jpeg'
+                    
+                ];
+            }
+            case 'PUT':
+            case 'PATCH': {
+                return [
+                    'name' => 'required|string|min:3',
+                    'description' => 'required|string',
+                    'small_pizza_price' => 'required|numeric',
+                    'medium_pizza_price' => 'required|numeric',
+                    'large_pizza_price' => 'required|numeric',
+                    'category' => 'required',
+                    'image' => 'mimes:png,jpg,jpeg'
+                ];
+            }
+            default:
+                break;
+        }
+
         return [
-            'name' => 'required|string|min:3',
-            'description' => 'required|string',
-            'small_pizza_price' => 'required|numeric',
-            'medium_pizza_price' => 'required|numeric',
-            'large_pizza_price' => 'required|numeric',
-            'category' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg'
+
         ];
     }
 }

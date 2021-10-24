@@ -40,8 +40,8 @@
 							      <td>{{ $pizza->medium_pizza_price }}</td>
 							      <td>{{ $pizza->large_pizza_price }}</td>
 							      <td>{{ $pizza->category }}</td>
-							      <td><button class="btn btn-primary">Edit</button></td>
-							      <td><button class="btn btn-danger">Delete</button></td>
+							      <td><a href="{{ route('pizza.edit', $pizza->id ) }}" class="btn btn-primary">Edit</a></td>
+							      <td><a href="" class="btn btn-danger">Delete</a></td>
 							    </tr>
 							    @empty
 							    <tr class="text-center">

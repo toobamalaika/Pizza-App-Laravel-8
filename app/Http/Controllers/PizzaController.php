@@ -70,7 +70,8 @@ class PizzaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pizza = Pizza::find($id);
+        return view('pizza.edit',compact('pizza'));
     }
 
     /**
@@ -80,9 +81,27 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PizzaStoreRequest $request, $id)
     {
-        //
+        //grab pizza id
+        $pizza = Pizza::find($id);
+        if($request->has('image')) {
+            $path = $request->image->store('public/pizza');
+        }
+        else {
+            $path = $pizza->image;
+        }
+        // $pizza = new Pizza;
+        $pizza->name = $request->name;
+        $pizza->description = $request->description;
+        $pizza->small_pizza_price = $request->small_pizza_price;
+        $pizza->medium_pizza_price = $request->medium_pizza_price;
+        $pizza->large_pizza_price = $request->large_pizza_price;
+        $pizza->category = $request->category;
+        $pizza->image = $path;
+        $pizza->update();
+        return redirect()->route('pizza.index')->with('message','Pizza updated successfully!');
+
     }
 
     /**
