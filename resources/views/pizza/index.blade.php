@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Pizza Listing</div>
+                <div class="card-header">
+                	Pizza Listing
+                	<a href="{{ route('pizza.create') }}" class="btn btn-primary float-end">Add Pizza</a>
+                </div>
 
                 <div class="card-body">
                     @if (session('message'))
@@ -41,7 +44,29 @@
 							      <td>{{ $pizza->large_pizza_price }}</td>
 							      <td>{{ $pizza->category }}</td>
 							      <td><a href="{{ route('pizza.edit', $pizza->id ) }}" class="btn btn-primary">Edit</a></td>
-							      <td><a href="" class="btn btn-danger">Delete</a></td>
+							      <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $pizza->id }}">Delete</button> </td>
+							      	<!-- Modal -->
+									<div class="modal fade" id="exampleModal{{ $pizza->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<form action="{{ route('pizza.destroy',$pizza->id) }}" method="POST">
+											@csrf
+											@method('DELETE')
+										  	<div class="modal-dialog">
+										    	<div class="modal-content">
+										      		<div class="modal-header">
+										        		<h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+										        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      		</div>
+										      		<div class="modal-body">
+										        		Are you sure ?
+										      		</div>
+										      		<div class="modal-footer">
+										        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										        		<button type="submit" class="btn btn-danger">Delete</button>
+										      		</div>
+										    </div>
+										  </div>
+										</form>
+									</div>
 							    </tr>
 							    @empty
 							    <tr class="text-center">
@@ -50,10 +75,12 @@
 							    @endforelse
 							</tbody>
 						</table>
+						{{ $pizzas->links() }}
 					</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
