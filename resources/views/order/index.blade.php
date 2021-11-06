@@ -10,7 +10,11 @@
 			  </ol>
 			</nav>
             <div class="card">
-                <div class="card-header">Order</div>
+                <div class="card-header">
+                	Order
+                	<a href="{{ route('pizza.create') }}" class="btn btn-sm btn-success float-end m-1">Create Pizza</a>
+                	<a href="{{ route('pizza.index') }}" class="btn btn-sm btn-primary float-end m-1">View Pizzas</a>
+            	</div>
 
                 <div class="card-body">
                     <div class="table-responsive">

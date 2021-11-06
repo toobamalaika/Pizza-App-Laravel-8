@@ -13,15 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
+Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontpage');
+Route::get('/pizza/{id}', [App\Http\Controllers\FrontendController::class, 'show'])->name('pizza.show');
+Route::post('/order/store', [App\Http\Controllers\FrontendController::class, 'store'])->name('order.store');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => 'auth','admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function() {
 
     // For Pizza
     Route::get('/pizza', [App\Http\Controllers\PizzaController::class, 'index'])->name('pizza.index');

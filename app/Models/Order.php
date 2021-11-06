@@ -10,6 +10,7 @@ use App\Models\Pizza;
 class Order extends Model
 {
     use HasFactory;
+    protected $guarded = [];
  
     // relation one to many from user table
     public function user() {
