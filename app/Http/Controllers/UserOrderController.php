@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
 
 class UserOrderController extends Controller
 {
@@ -96,6 +97,12 @@ class UserOrderController extends Controller
         // retturn back page
         return back();
 
+    }
+
+    // get all customers
+    public function customers() {
+        $customers = User::where('is_admin',0)->get();
+        return view('customers', compact('customers'));
     }
 
 }
